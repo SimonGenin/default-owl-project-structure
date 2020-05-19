@@ -1,11 +1,26 @@
 import { Component, tags, useState } from "@odoo/owl";
 
-const { xml } = tags;
+const { xml, css } = tags;
+
+const TEMPLATE = xml`
+    <div t-on-click="update">Hello <t t-esc="state.text"/></div>
+`
+
+const STYLE = css`
+    // Add CSS here
+`
 
 export class App extends Component {
-  static template = xml`<div t-on-click="update">Hello <t t-esc="state.text"/></div>`;
-  state = useState({ text: "Owl" });
+
+  static template = TEMPLATE;
+  static style = STYLE;
+
+  state = useState({
+       text: "Owl",
+    });
+  
   update() {
     this.state.text = this.state.text === "Owl" ? "World" : "Owl";
   }
+
 }
